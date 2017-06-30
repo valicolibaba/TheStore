@@ -1,0 +1,13 @@
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Store.Database.Models
+{
+    public class Cart
+    {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public virtual int Id { get; set; }
+        public virtual Customer Customer { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
+    }
+}

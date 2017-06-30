@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheStore</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    @{ var baseUrl = Request.Url?.AbsoluteUri.Replace(Request.Url.PathAndQuery,
+                           string.Empty) + Url.Action("Index", "Home"); }
+<input type="hidden" id="baseUrl" value="@baseUrl" />
+<div class="navbar navbar-inverse navbar-fixed-top" >
+    <div class="container">
+
+        <div class="navbar-header">
+
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("The Store ~Restaurant&Pizzerie~", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Despre", "About", "Home")</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                @if (Request.IsAuthenticated)
+                {
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <span class="glyphicon glyphicon-user">
+                                </span> Bună @User.Identity.Name
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            @if (User.Identity.Name != "admin@store.ro")
+                            {
+                                <li><a href="@Url.Action("Edit", "Account", new {@email = User.Identity.Name})"><span class="glyphicon glyphicon-edit"></span> Profil</a></li>
+
+                                <li><a href="@Url.Action("Index", "Order")"><span class="glyphicon glyphicon-folder-close"></span> Istoric Comenzi</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="@Url.Action("Edit", "Product")"><span class="glyphicon glyphicon-plus"></span> Adaugă produs</a></li>
+                            }
+                        </ul>
+                    </li>
+                    <li><a href="@Url.Action("Logout", "Account")"><span class="glyphicon glyphicon-log-out"></span> Deconectați-vă</a></li>
+                    if (User.Identity.Name != "admin@store.ro")
+                    {
+                        <li><a href="@Url.Action("Index", "Cart")"><span class="glyphicon glyphicon-shopping-cart"></span>Comanda ta</a></li>}
+                }
+                else
+                {
+                    <li><a href="@Url.Action("Register", "Account")"><span class="glyphicon glyphicon-user"></span> Creează Cont</a></li>
+                    <li><a href="@Url.Action("Login", "Account")"><span class="glyphicon glyphicon-log-in"></span> Logare</a></li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+    
+<div class="container">
+    <div class="ribbon">
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav ">
+
+                <li><a href="@Url.Action("Index", "Product", new {@categoryName = "Pizza"})">Pizza</a></li>
+                <li><a href="@Url.Action("Index", "Product", new {@categoryName = "Preparate"})">Preparate</a></li>
+                <li><a href="@Url.Action("Index", "Product", new {@categoryName = "Cofetarie&Patiserie"})">Cofetărie&Patiserie</a></li>
+                <li><a href="@Url.Action("Index", "Product", new {@categoryName = "Platouri"})">Platouri</a></li>
+                <li><a href="@Url.Action("Index", "Product", new {@categoryName = "Bauturi"})">Băuturi</a></li>
+            </ul>
+            <ul class="nav navbar-nav ">
+                <li>
+                    <form action="@Url.Action("Search", "Product")" method="post" class="navbar-form" style="display: inline-table;" role="search">
+                        <div class="input-group">
+                            <input type="text" id="search-product" class="form-control pull-right" name="Name" style="width: 200px; margin-right: 30px, border:1px solid black; background-color: #e5e5e5;" placeholder="Cauta" autocomplete="off">
+                            <span class="input-group-btn">
+                                <button type="reset" class="btn btn-default">
+                                    <a href="@Url.Action("Index", "Product")">
+                                        <span class="glyphicon glyphicon-remove">
+                                            <span class="sr-only">Close</span>
+                                        </span>
+                                    </a>
+                                </button>
+                                <button type="submit" class="btn btn-default">
+                                    <span class="glyphicon glyphicon-search">
+                                        <span class="sr-only">Search</span>
+                                    </span>
+                                </button>
+                            </span>
+                        </div>
+                        <div style="display: none" id="product-search-suggestions" class="suggetions">
+                            <ul id="product-search-suggestions-content" class="list-group"></ul>
+                        </div>
+                    </form>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript" src="@Url.Content("~/Scripts/site.js")"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="thumbnail">
+    <div class="thumbnail">
+        <h3>Te aștepăm cu mare drag pentru a avea o experienta culinară și momente de răsfat!</h3>
+    </div>
+    <div class="item  col-xs-4 col-lg-4">
+        <div class="thumbnail">
+          
+            <div class="caption">
+                <h4 class="group inner list-group-item-heading">
+                    <h3> Restaurant The Store</h3>
+                </h4>
+                <p class="group inner list-group-item-text">
+                    Adresă : Iași ,Bulevardul Țuțora , Numărul 1
+                </p>
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                            Orar : 10:00-23:00
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="item  col-xs-4 col-lg-4">
+        <div class="thumbnail">
+
+            <div class="caption">
+                <h4 class="group inner list-group-item-heading">
+                    <h3> Restaurant The Store- Livrări la domiciliu</h3>
+                </h4>
+                <p class="group inner list-group-item-text">
+                    Adresă : Iași ,Bulevardul Țuțora , Numărul 1
+                </p>
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        Orar : Non Stop
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="item  col-xs-4 col-lg-4">
+        <div class="thumbnail">
+
+            <div class="caption">
+                <h4 class="group inner list-group-item-heading">
+                    <h3> Metode de contact</h3>
+                </h4>
+                <p class="group inner list-group-item-text">
+                  Email: thestore@restaurant.ro
+                </p>
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        Telefon:
+
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        Orange: 0744896123
+
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        Telekom: 0723458904
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+        <div id="map"></div>
+        <script>
+            function initMap() {
+                var uluru = { lat: 47.149862, lng: 27.593397 };
+                var map = new google.maps.Map(document.getElementById('map'),
+                {
+                    zoom: 4,
+                    center: uluru
+                });
+                var marker = new google.maps.Marker({
+                    position: uluru,
+                    map: map
+                });
+            }
+        </script>
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiZlicF_6M2__P_p-leD9jhZi4gw1hO5A&callback=initMap">
+
+
+
+        </script>
+    </div>
+</body>
+</html>

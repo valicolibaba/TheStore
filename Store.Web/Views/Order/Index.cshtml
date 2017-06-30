@@ -1,0 +1,29 @@
+﻿@model Store.Web.Models.OrderListViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Comenzile tale</h2>
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Data comenzii</th>
+                <th>Pret</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var order in Model.Orders)
+        {
+            <tr>
+                <td>@order.Customer.Email</td>
+                <td>@order.Date</td>
+                <td>@order.Products.Sum(x => x.Price)</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
