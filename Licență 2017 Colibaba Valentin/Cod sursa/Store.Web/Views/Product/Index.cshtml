@@ -1,0 +1,71 @@
+﻿@model Store.Web.Models.ProductListViewModel
+@{
+    ViewBag.Title = "Index";
+}
+@if (User.Identity.Name == "admin@store.ro")
+{
+    <div id="products" class="row list-group">
+        @foreach (var product in Model.Products)
+        {
+            <div class="item  col-xs-4 col-lg-4">
+                <div class="thumbnail">
+                    @{ var imageUrl = string.IsNullOrEmpty(product.ImageUrl) ? @Url.Content("~/Content/Images/Products/default.jpg") : product.ImageUrl; }
+                    <img max-width: 100%; height: auto; width: auto\9; style="max-width: 200px; max-height: 180px; width: auto; height: auto" class="product-image" src=@imageUrl alt=@product.Name/>
+                    <div class="caption">
+                        <h4 class="group inner list-group-item-heading">
+                            @product.Name
+                        </h4>
+                        <p class="group inner list-group-item-text">
+                            @product.Ingredients
+                        </p>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <p class="lead">
+                                    @product.Price lei
+                                </p>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <a class="btn btn-success" href="@Url.Action("Edit", "Product", new {@id = product.Id})">Editează produsul</a>
+                                <a href="@Url.Action("Delete", "Product", new {@productId = product.Id})" class="btn btn-danger"> X</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+                        }
+                        else
+                        {
+                            <div id="products" class="row list-group">
+                                @foreach (var product in Model.Products)
+                                {
+                                    <div class="item  col-xs-4 col-lg-4">
+                                        <div class="thumbnail">
+                                            @{ var imageUrl = string.IsNullOrEmpty(product.ImageUrl) ? @Url.Content("~/Content/Images/Products/default.jpg") : product.ImageUrl;}
+                                            <img max-width: 100%; height: auto; width: auto\9; style="max-width: 200px; max-height: 180px; width:auto; height:auto" class="product-image" src=@imageUrl alt=@product.Name />
+                                            <div class="caption">
+                                                <h4 class="group inner list-group-item-heading">
+                                                    @product.Name
+                                                </h4>
+                                                <p class="group inner list-group-item-text">
+                                                    @product.Ingredients
+                                                </p>
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-md-6">
+                                                        <p class="lead">
+                                                            @product.Price lei
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-xs-12 col-md-6">
+                                                        <a class="btn btn-success" href="@Url.Action("AddProduct", "Cart", new {@productId = product.Id})">Adaugă în coș</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                }
+                            </div>
+                                                }
+
+
